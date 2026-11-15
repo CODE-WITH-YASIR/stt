@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
   // Prevent Next.js signature disclosure
   poweredByHeader: false,
 
