@@ -66,7 +66,7 @@ export default function TermsPage() {
             <h2 className="text-base sm:text-lg font-bold text-[#300C41]">5. Governing Law & Jurisdiction</h2>
             <p>
               These terms are governed by the laws of India, with legal jurisdiction vested in the courts of
-              Bengaluru, Karnataka.
+              Chennai, Tamil Nadu.
             </p>
           </section>
         </div>

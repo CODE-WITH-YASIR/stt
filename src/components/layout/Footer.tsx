@@ -54,7 +54,7 @@ export default function Footer() {
             </p>
 
             <div className="pt-2 text-white/60 text-xs">
-              <p>Bangalore, Karnataka, India • Serving Global Clients</p>
+              <p>Chennai, Tamil Nadu, India • Serving Global Clients</p>
             </div>
           </div>
 
