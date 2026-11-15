@@ -264,6 +264,35 @@ export async function sendEnquiryNotification(
       });
 
       const data = (await res.json().catch(() => ({}))) as Record<string, unknown>;
+
+      if (!res.ok) {
+        const initialError = String(data.message || data.error || "");
+        const match = initialError.match(/own email address \(([^)]+)\)/);
+        if (match && match[1]) {
+          const fallbackOwner = match[1];
+          const retryRes = await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${resendApiKey.trim()}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              from: DEFAULT_SENDER,
+              to: [fallbackOwner],
+              reply_to: email,
+              subject: EMAIL_SUBJECT,
+              html: htmlContent,
+              text: plainTextContent,
+            }),
+          });
+          const retryData = (await retryRes.json().catch(() => ({}))) as Record<string, unknown>;
+          if (retryRes.ok) {
+            console.log(`[RESEND SUCCESS] Forwarded to account owner ${fallbackOwner} for lead ${id}`);
+            return { success: true, delivered: true, messageId: String(retryData.id || "ok") };
+          }
+        }
+      }
+
       if (res.ok) {
         console.log(`[RESEND SUCCESS] Email dispatched to ${PRIMARY_RECIPIENT} for lead ${id}`);
         return { success: true, delivered: true, messageId: String(data.id || "ok") };

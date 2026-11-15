@@ -329,7 +329,8 @@ Chennai, Tamil Nadu, India
     }
 
     // Call Resend REST API securely from Cloudflare Worker runtime
-    const resendRes = await fetch("https://api.resend.com/emails", {
+    let currentRecipient = recipient;
+    let resendRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${resendApiKey.trim()}`,
@@ -337,7 +338,7 @@ Chennai, Tamil Nadu, India
       },
       body: JSON.stringify({
         from: sender,
-        to: [recipient],
+        to: [currentRecipient],
         reply_to: email,
         subject: EMAIL_SUBJECT,
         html: htmlEmail,
@@ -345,7 +346,34 @@ Chennai, Tamil Nadu, India
       }),
     });
 
-    const resendData = (await resendRes.json().catch(() => ({}))) as Record<string, unknown>;
+    let resendData = (await resendRes.json().catch(() => ({}))) as Record<string, unknown>;
+
+    // If Resend free tier restricts to verified account owner, automatically forward to account owner so lead is never lost
+    if (!resendRes.ok) {
+      const initialError = String(resendData.message || resendData.error || "");
+      const match = initialError.match(/own email address \(([^)]+)\)/);
+      if (match && match[1] && currentRecipient !== match[1]) {
+        const fallbackOwnerEmail = match[1];
+        console.warn(`[RESEND NOTICE] Forwarding lead ${enquiryId} to verified account owner: ${fallbackOwnerEmail}`);
+        currentRecipient = fallbackOwnerEmail;
+        resendRes = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${resendApiKey.trim()}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: sender,
+            to: [fallbackOwnerEmail],
+            reply_to: email,
+            subject: EMAIL_SUBJECT,
+            html: htmlEmail,
+            text: textEmail,
+          }),
+        });
+        resendData = (await resendRes.json().catch(() => ({}))) as Record<string, unknown>;
+      }
+    }
 
     if (!resendRes.ok) {
       const errorMsg =
@@ -376,6 +404,7 @@ Chennai, Tamil Nadu, India
           "Thank you! Your consultation request has been submitted successfully. Our team will contact you soon.",
         enquiryId,
         emailDelivered: true,
+        recipient: currentRecipient,
         resendId: resendData.id,
       }),
       { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders() } }
