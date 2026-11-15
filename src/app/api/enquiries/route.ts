@@ -123,7 +123,7 @@ export async function POST(req: NextRequest) {
       preferredContact: preferredContact || "Email",
     });
 
-    // 2. Automatically dispatch notification to mohamedyasir2005@gmail.com asynchronously
+    // 2. Automatically dispatch notification to niyantechh@gmail.com asynchronously
     // Non-blocking dispatch prevents HTTP socket starvation and timeout under high concurrency
     sendEnquiryNotification({
       id: newEnquiry.id,

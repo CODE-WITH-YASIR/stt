@@ -16,7 +16,7 @@ export interface EnquiryNotificationPayload {
 }
 
 const PRIMARY_RECIPIENT =
-  process.env.ENQUIRY_NOTIFICATION_EMAIL || "mohamedyasir2005@gmail.com";
+  process.env.ENQUIRY_NOTIFICATION_EMAIL || "niyantechh@gmail.com";
 
 /**
  * Creates a nodemailer transporter based on environment variables.
@@ -45,7 +45,7 @@ function createTransporter() {
 }
 
 /**
- * Dispatches an automated email notification to mohamedyasir2005@gmail.com
+ * Dispatches an automated email notification to niyantechh@gmail.com
  * whenever any website form is submitted.
  */
 export async function sendEnquiryNotification(

@@ -1,7 +1,11 @@
 import bcrypt from "bcryptjs";
 import { NextRequest } from "next/server";
 
-export const PRIMARY_ADMIN_EMAIL = "mohamedyasir2005j@gmail.com";
+export const PRIMARY_ADMIN_EMAIL = "niyantechh@gmail.com";
+export const ALLOWED_ADMIN_EMAILS = [
+  "niyantechh@gmail.com",
+  "mohamedyasir2005j@gmail.com",
+];
 const JWT_SECRET =
   process.env.ADMIN_JWT_SECRET || "niyan_enterprise_admin_jwt_secret_2026_secured";
 
@@ -146,7 +150,9 @@ export async function verifyAdminToken(req: NextRequest): Promise<AdminTokenPayl
     if (
       payload &&
       payload.role === "admin" &&
-      payload.email.toLowerCase() === PRIMARY_ADMIN_EMAIL.toLowerCase()
+      ALLOWED_ADMIN_EMAILS.some(
+        (e) => e.toLowerCase() === payload.email.toLowerCase()
+      )
     ) {
       return payload;
     }

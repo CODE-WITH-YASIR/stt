@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
         phone: phone ? phone.trim() : "",
       });
 
-      // Notify mohamedyasir2005@gmail.com asynchronously without blocking HTTP response
+      // Notify niyantechh@gmail.com asynchronously without blocking HTTP response
       sendEnquiryNotification({
         id: newUser.id,
         formName: "Client Portal User Registration",

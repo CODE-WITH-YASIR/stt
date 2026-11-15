@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
       ],
     });
 
-    // Notify mohamedyasir2005@gmail.com of support ticket
+    // Notify niyantechh@gmail.com of support ticket
     try {
       await sendEnquiryNotification({
         id: newTicket.id,

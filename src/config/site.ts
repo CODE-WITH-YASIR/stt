@@ -47,8 +47,8 @@ export const siteConfig: SiteConfig = {
   url: "https://niyan.ai",
   ogImage: "https://niyan.ai/og-image.jpg",
   contact: {
-    email: "mohamedyasir2005@gmail.com",
-    supportEmail: "mohamedyasir2005@gmail.com",
+    email: "niyantechh@gmail.com",
+    supportEmail: "niyantechh@gmail.com",
     phone: "",
     phoneDisplay: "",
     whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "917010886321",

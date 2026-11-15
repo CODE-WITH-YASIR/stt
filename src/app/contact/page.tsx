@@ -28,7 +28,7 @@ export default function ContactPage() {
 
   const handleGmailClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const recipient = "mohamedyasir2005@gmail.com";
+    const recipient = "niyantechh@gmail.com";
     const isMobile =
       typeof window !== "undefined" &&
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -294,7 +294,7 @@ export default function ContactPage() {
 
                 {/* Gmail Tile */}
                 <a
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=mohamedyasir2005@gmail.com"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=niyantechh@gmail.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={handleGmailClick}

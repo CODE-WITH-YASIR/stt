@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
       isFeatured: false,
     });
 
-    // Notify mohamedyasir2005@gmail.com asynchronously without blocking HTTP response
+    // Notify niyantechh@gmail.com asynchronously without blocking HTTP response
     sendEnquiryNotification({
       id: newReview.id,
       formName: "Client Testimonial & Review Submission",
