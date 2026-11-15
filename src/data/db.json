@@ -1,0 +1,480 @@
+{
+  "enquiries": [
+    {
+      "fullName": "Elena Rostova",
+      "email": "elena@biomedpulse.com",
+      "phone": "+44 7911 123456",
+      "company": "Independent / Individual",
+      "services": [
+        "Custom Web Platform",
+        "Cloud & DevOps"
+      ],
+      "description": "Interactive diagnostic telemetry reporting for research labs.",
+      "budget": "To be discussed during scoping",
+      "timeline": "Standard",
+      "preferredContact": "Email",
+      "id": "ENQ-3044",
+      "status": "New",
+      "createdAt": "2026-11-09T19:08:04.606Z"
+    },
+    {
+      "fullName": "Marcus Vance",
+      "email": "marcus.v@fintechinnovate.io",
+      "phone": "Not provided",
+      "company": "Independent / Individual",
+      "services": [
+        "Cloud Architecture",
+        "Security & Compliance"
+      ],
+      "description": "Multi-region Kubernetes deployment and zero-trust auth pipeline review.",
+      "budget": "To be discussed during scoping",
+      "timeline": "Standard",
+      "preferredContact": "Email",
+      "id": "ENQ-6743",
+      "status": "New",
+      "createdAt": "2026-11-09T19:08:04.571Z"
+    },
+    {
+      "fullName": "Aisha Al-Mansoor",
+      "email": "aisha@luxurystudio.ae",
+      "phone": "+971 50 123 4567",
+      "company": "Independent / Individual",
+      "services": [
+        "AI Solutions",
+        "Web Development"
+      ],
+      "description": "We require a generative AI assistant integrated into our private client luxury portal.",
+      "budget": "To be discussed during scoping",
+      "timeline": "Standard",
+      "preferredContact": "Email",
+      "id": "ENQ-9874",
+      "status": "New",
+      "createdAt": "2026-11-09T19:08:04.510Z"
+    },
+    {
+      "fullName": "Dr. Jane Watson",
+      "email": "jane.watson@university.edu",
+      "phone": "7010886321",
+      "company": "Imperial Tech",
+      "services": [
+        "AI & Machine Learning"
+      ],
+      "description": "Testing central enquiry system integration.",
+      "budget": "To be discussed during scoping",
+      "timeline": "Standard",
+      "preferredContact": "Email",
+      "id": "ENQ-6616",
+      "status": "New",
+      "createdAt": "2026-11-09T18:56:59.575Z"
+    },
+    {
+      "fullName": "Dr. Jane Watson",
+      "email": "jane.watson@university.edu",
+      "phone": "7010886321",
+      "company": "Imperial Tech",
+      "services": [
+        "AI & Machine Learning"
+      ],
+      "description": "Testing central enquiry system integration.",
+      "budget": "To be discussed during scoping",
+      "timeline": "Standard",
+      "preferredContact": "Email",
+      "id": "ENQ-7764",
+      "status": "New",
+      "createdAt": "2026-11-09T18:55:38.114Z"
+    },
+    {
+      "fullName": "Mohamed Yasir",
+      "email": "mohamedyasir2000j@gmail.com",
+      "phone": "7010886321",
+      "company": "dhaaanish",
+      "services": [
+        "AI Chatbot Development"
+      ],
+      "description": "mmmm",
+      "budget": "Personalized Scoping (To be discussed)",
+      "timeline": "Standard",
+      "preferredContact": "Email",
+      "id": "ENQ-4197",
+      "status": "New",
+      "createdAt": "2026-11-09T18:18:03.630Z"
+    },
+    {
+      "fullName": "Dr. Test Visitor",
+      "email": "visitor@example.com",
+      "phone": "+91 9988776655",
+      "company": "Test Research Lab",
+      "services": [
+        "AI & Machine Learning",
+        "AI Chatbot Development"
+      ],
+      "description": "Testing scope planner integration with the new NIYAN design.",
+      "budget": "Personalized Scoping (No public prices)",
+      "timeline": "Standard (2-4 Weeks)",
+      "preferredContact": "WhatsApp",
+      "id": "ENQ-8853",
+      "status": "New",
+      "createdAt": "2026-11-08T11:00:24.234Z"
+    },
+    {
+      "fullName": "Engineering Lead",
+      "email": "lead@enterprise.io",
+      "phone": "+91 98765 00000",
+      "company": "Apex Robotics",
+      "services": [
+        "AI & Machine Learning",
+        "AI Chatbot Development"
+      ],
+      "description": "Require edge computer vision model and WhatsApp customer service bot.",
+      "budget": "To be discussed during scoping",
+      "timeline": "Standard (2-4 Weeks)",
+      "preferredContact": "WhatsApp",
+      "id": "ENQ-6302",
+      "status": "New",
+      "createdAt": "2026-11-08T10:16:10.149Z"
+    },
+    {
+      "fullName": "Test User",
+      "email": "test@example.com",
+      "phone": "+91 99999 88888",
+      "company": "Acme Labs",
+      "services": [
+        "AI & Machine Learning",
+        "App Development"
+      ],
+      "description": "Testing automated pipeline for robotics telemetry",
+      "budget": "₹1,50,000 - ₹3,00,000",
+      "timeline": "1-2 Months",
+      "preferredContact": "WhatsApp",
+      "id": "ENQ-9121",
+      "status": "New",
+      "createdAt": "2026-11-08T09:26:07.146Z"
+    },
+    {
+      "id": "ENQ-1001",
+      "fullName": "Sarah Jenkins",
+      "email": "sarah.j@vertexbiotech.com",
+      "phone": "+91 98765 11223",
+      "company": "Vertex Biotech",
+      "services": [
+        "AI & Machine Learning",
+        "Data Science & Analytics"
+      ],
+      "description": "We need an edge-deployed computer vision model to inspect cellular culture trays and flag bacterial contamination automatically.",
+      "budget": "₹1,50,000 - ₹3,00,000",
+      "timeline": "1-2 Months",
+      "preferredContact": "WhatsApp",
+      "status": "In Progress",
+      "adminNotes": "Initial scoping call completed. Sent technical proposal draft.",
+      "createdAt": "2026-11-02T10:15:00.000Z"
+    },
+    {
+      "id": "ENQ-1002",
+      "fullName": "Kavita Rao",
+      "email": "kavita.rao@rvce.edu.in",
+      "phone": "+91 98450 33445",
+      "company": "RV College of Engineering",
+      "services": [
+        "Final Year Project Solutions"
+      ],
+      "description": "Looking for academic guidance and architecture review for our 4-person final year capstone project on transformer-based Kannada text summarization.",
+      "budget": "₹15,000 - ₹30,000",
+      "timeline": "2-4 Weeks",
+      "preferredContact": "Email",
+      "status": "Contacted",
+      "adminNotes": "Scheduled mentor sync for Thursday 4 PM.",
+      "createdAt": "2026-11-05T14:30:00.000Z"
+    },
+    {
+      "id": "ENQ-1003",
+      "fullName": "Arun Kumar",
+      "email": "arun@cloudscale.io",
+      "phone": "+91 91234 56789",
+      "company": "CloudScale Logistics",
+      "services": [
+        "Web Development",
+        "App Development"
+      ],
+      "description": "Need a cross-platform fleet management mobile app for 200 delivery drivers with real-time GPS check-ins and an admin dispatcher dashboard.",
+      "budget": "₹3,00,000+",
+      "timeline": "2-3 Months",
+      "preferredContact": "Phone",
+      "status": "New",
+      "adminNotes": "",
+      "createdAt": "2026-11-07T09:00:00.000Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "usr-admin-primary",
+      "name": "Mohamed Yasir",
+      "email": "mohamedyasir2005j@gmail.com",
+      "passwordHash": "$2b$10$B6/.m0in5kQbl1s.QamEJel9VS5skDxF/EO6pD55Q8PnWVrOQ8mxi",
+      "role": "admin",
+      "company": "Executive Administration",
+      "phone": "+91 98765 43210",
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "usr-client-01",
+      "name": "Sarah Jenkins",
+      "email": "client@example.com",
+      "passwordHash": "$2b$10$RXZFu3RhZNjgA.t5KWasxuMEEvz6dqNtrFdL6RS22m8knjekAt6TO",
+      "role": "client",
+      "company": "Vertex Biotech",
+      "phone": "+91 98765 11223",
+      "createdAt": "2026-10-15T00:00:00.000Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": "PRJ-901",
+      "clientId": "usr-client-01",
+      "clientName": "Sarah Jenkins",
+      "clientEmail": "client@example.com",
+      "title": "BioScan Contamination Detection Vision System",
+      "serviceType": "AI & Machine Learning",
+      "status": "In Progress",
+      "progress": 68,
+      "startDate": "2026-10-18",
+      "targetDate": "2026-12-15",
+      "budget": "₹2,40,000",
+      "description": "High-throughput edge computer vision pipeline detecting anomalies and bacterial colonization in lab assays.",
+      "milestones": [
+        {
+          "title": "Data Ingestion & Exploratory Analysis",
+          "completed": true,
+          "dueDate": "2026-10-25"
+        },
+        {
+          "title": "Model Architecture & Baseline Training",
+          "completed": true,
+          "dueDate": "2026-11-05"
+        },
+        {
+          "title": "Quantization & Edge Optimization (TensorRT)",
+          "completed": true,
+          "dueDate": "2026-11-18"
+        },
+        {
+          "title": "REST API Microservice & Docker Integration",
+          "completed": false,
+          "dueDate": "2026-11-30"
+        },
+        {
+          "title": "On-Premise Validation & Final Handover",
+          "completed": false,
+          "dueDate": "2026-12-15"
+        }
+      ],
+      "deliverables": [
+        {
+          "name": "Exploratory Data Analysis Report.pdf",
+          "size": "4.2 MB",
+          "uploadedAt": "2026-10-26"
+        },
+        {
+          "name": "Model Weights Benchmark v1.0.onnx",
+          "size": "48.1 MB",
+          "uploadedAt": "2026-11-06"
+        }
+      ]
+    },
+    {
+      "id": "PRJ-902",
+      "clientId": "usr-client-01",
+      "clientName": "Sarah Jenkins",
+      "clientEmail": "client@example.com",
+      "title": "Lab Telemetry Analytics Dashboard",
+      "serviceType": "Data Science & Analytics",
+      "status": "Completed",
+      "progress": 100,
+      "startDate": "2026-09-01",
+      "targetDate": "2026-10-10",
+      "budget": "₹85,000",
+      "description": "Automated Power BI executive dashboard for monitoring assay yields, thermal cycles, and incubation metrics.",
+      "milestones": [
+        {
+          "title": "Schema Definition & Data Lake Sync",
+          "completed": true,
+          "dueDate": "2026-09-10"
+        },
+        {
+          "title": "DAX Formulas & KPI Cards Construction",
+          "completed": true,
+          "dueDate": "2026-09-22"
+        },
+        {
+          "title": "Executive Sign-Off & Delivery",
+          "completed": true,
+          "dueDate": "2026-10-05"
+        }
+      ],
+      "deliverables": [
+        {
+          "name": "Lab_Executive_Report_v2.pbix",
+          "size": "14.6 MB",
+          "uploadedAt": "2026-10-08"
+        },
+        {
+          "name": "Operator_User_Guide.pdf",
+          "size": "1.8 MB",
+          "uploadedAt": "2026-10-09"
+        }
+      ]
+    }
+  ],
+  "invoices": [
+    {
+      "id": "INV-2026-081",
+      "clientId": "usr-client-01",
+      "projectId": "PRJ-901",
+      "projectTitle": "BioScan Contamination Detection Vision System",
+      "amount": 120000,
+      "tax": 21600,
+      "total": 141600,
+      "status": "Paid",
+      "issueDate": "2026-10-18",
+      "dueDate": "2026-10-25",
+      "paidDate": "2026-10-20",
+      "items": [
+        {
+          "description": "Milestone 1 & 2: Dataset curation and model baseline training",
+          "rate": 120000,
+          "qty": 1,
+          "amount": 120000
+        }
+      ]
+    },
+    {
+      "id": "INV-2026-094",
+      "clientId": "usr-client-01",
+      "projectId": "PRJ-901",
+      "projectTitle": "BioScan Contamination Detection Vision System",
+      "amount": 120000,
+      "tax": 21600,
+      "total": 141600,
+      "status": "Pending",
+      "issueDate": "2026-11-06",
+      "dueDate": "2026-11-20",
+      "items": [
+        {
+          "description": "Milestone 3 & 4: Quantization, TensorRT deployment & API endpoints",
+          "rate": 120000,
+          "qty": 1,
+          "amount": 120000
+        }
+      ]
+    }
+  ],
+  "tickets": [
+    {
+      "id": "TCK-401",
+      "clientId": "usr-client-01",
+      "clientName": "Sarah Jenkins",
+      "subject": "Question regarding TensorRT FP16 quantization benchmarks",
+      "priority": "Medium",
+      "status": "Answered",
+      "createdAt": "2026-11-06T11:20:00.000Z",
+      "messages": [
+        {
+          "sender": "Sarah Jenkins",
+          "isStaff": false,
+          "content": "Hi team, we reviewed the benchmark report. What is the expected frame latency when running in FP16 precision on an NVIDIA Jetson Orin Nano?",
+          "timestamp": "2026-11-06T11:20:00.000Z"
+        },
+        {
+          "sender": "NIYAN Engineering Lead",
+          "isStaff": true,
+          "content": "Hello Sarah! On the Jetson Orin Nano, FP16 execution clocks in at 11.4 ms per 1080p frame (~87 FPS), easily exceeding your 60 FPS requirement with 40% thermal headroom.",
+          "timestamp": "2026-11-06T13:45:00.000Z"
+        }
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "name": "Dr. Sophia Chen",
+      "designation": "VP Product",
+      "organization": "Zenith Health AI",
+      "serviceUsed": "AI Solutions & Clinical Architecture",
+      "rating": 5,
+      "content": "NIYAN engineered our HIPAA-compliant clinical reasoning interface with exceptional precision and responsiveness.",
+      "isFeatured": false,
+      "id": "REV-39",
+      "date": "2026-11-09",
+      "isVerified": true
+    },
+    {
+      "id": "REV-01",
+      "name": "Dr. Ananya Sharma",
+      "designation": "Associate Professor & Research Guide",
+      "organization": "National Institute of Technology",
+      "serviceUsed": "Final Year Project Solutions",
+      "rating": 5,
+      "content": "The mentoring provided to my M.Tech research scholars was exceptionally thorough. The NIYAN engineering team helped them structure their deep learning ablation studies properly, resulting in an accepted IEEE conference submission.",
+      "isVerified": true,
+      "isFeatured": true,
+      "date": "2026-10-14"
+    },
+    {
+      "id": "REV-02",
+      "name": "Rohit Verma",
+      "designation": "Founder & CEO",
+      "organization": "LogiSync Solutions",
+      "serviceUsed": "Web Development",
+      "rating": 5,
+      "content": "NIYAN delivered our cloud dispatch portal ahead of schedule. The Next.js architecture is blazing fast, and the code quality was clean and well-documented. Highly recommended for production-grade engineering.",
+      "isVerified": true,
+      "isFeatured": true,
+      "date": "2026-10-28"
+    },
+    {
+      "id": "REV-03",
+      "name": "Vikram Sethi",
+      "designation": "Head of Operations",
+      "organization": "AeroPrecision Labs",
+      "serviceUsed": "Data Science & Analytics",
+      "rating": 5,
+      "content": "Our weekly reporting used to consume two full days of spreadsheet work. NIYAN's automated Power BI setup gave our executives instant visibility into plant margins. The ROI was realized in the first month.",
+      "isVerified": true,
+      "isFeatured": true,
+      "date": "2026-11-01"
+    }
+  ],
+  "blogPosts": [
+    {
+      "id": "post-1",
+      "slug": "building-production-rag-systems-without-hallucinations",
+      "title": "Architecting Zero-Hallucination Enterprise RAG Pipelines",
+      "excerpt": "A deep dive into hybrid lexical-dense vector retrieval, reciprocal rank fusion (RRF), and citation grounding for production knowledge assistants.",
+      "author": "NIYAN Engineering Team",
+      "category": "Artificial Intelligence",
+      "readTime": "6 min read",
+      "publishedAt": "2026-10-20",
+      "content": "Enterprise knowledge retrieval requires more than basic embedding similarity search. In production, vanilla vector retrieval frequently fails on alphanumeric codes, part numbers, and precise compliance language...\n\n### 1. Hybrid Search Architecture\nBy combining dense semantic vectors (e.g., text-embedding-3-large) with sparse lexical algorithms (BM25) using Reciprocal Rank Fusion, systems capture both conceptual meaning and exact keyword hits.\n\n### 2. Guardrails and Strict Rejection Prompts\nRather than forcing the LLM to speculate, configure explicit guardrail policies where the model must refuse when context similarity scores fall below threshold."
+    },
+    {
+      "id": "post-2",
+      "slug": "choosing-between-react-native-and-flutter-in-2026",
+      "title": "React Native vs Flutter in 2026: An Architecture-First Comparison",
+      "excerpt": "Evaluating performance, community ecosystem, native bridging, and developer velocity for mobile startup engineering.",
+      "author": "NIYAN Mobile Practice",
+      "category": "App Development",
+      "readTime": "8 min read",
+      "publishedAt": "2026-10-29",
+      "content": "Selecting a mobile framework in 2026 is no longer about raw FPS debates—both Flutter and React Native (with the New Architecture, TurboModules, and Fabric renderer) achieve flawless 60 to 120 FPS performance...\n\n### Key Decision Criteria\n- If your team has deep TypeScript/React expertise, React Native with Expo offers unmatched code sharing between web and mobile.\n- If you require bespoke canvas rendering, pixel-identical custom widgets, or complex graphics, Flutter remains a formidable choice."
+    },
+    {
+      "id": "post-3",
+      "slug": "ethical-academic-project-mentorship-guidelines",
+      "title": "Mastering the Final Year Engineering Project: From Concept to IEEE Viva",
+      "excerpt": "How undergraduate engineering scholars can bridge theoretical concepts with real-world open source code to build genuine defense-ready projects.",
+      "author": "Academic Solutions Group",
+      "category": "Academic Mentoring",
+      "readTime": "7 min read",
+      "publishedAt": "2026-11-04",
+      "content": "Engineering capstone projects often suffer from two extremes: either generic copy-paste projects that examiners immediately dismantle, or over-ambitious concepts that never reach a working prototype...\n\n### Formulating a Valid Research Question\nA strong project begins with a clear baseline comparison. Document what existing literature accomplishes, identify a specific bottleneck, and test a verifiable hypothesis with clear metrics."
+    }
+  ]
+}
