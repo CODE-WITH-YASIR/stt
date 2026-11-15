@@ -134,11 +134,10 @@ export default function ContactPage() {
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 <h3 className="text-2xl font-bold text-[#300C41]">
-                  Message Dispatched Successfully
+                  Consultation Request Submitted
                 </h3>
-                <p className="text-sm text-[#300C41]/75 max-w-md mx-auto leading-relaxed">
-                  Thank you! An authorized technical lead will review your
-                  requirements and respond within 4 business hours.
+                <p className="text-sm text-[#300C41]/85 max-w-md mx-auto leading-relaxed font-medium">
+                  Thank you! Your consultation request has been submitted successfully. Our team will contact you soon.
                 </p>
                 <div className="pt-4">
                   <button

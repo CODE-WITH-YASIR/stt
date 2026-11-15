@@ -65,23 +65,39 @@ export async function POST(req: NextRequest) {
 
     const cleanEmail = String(email || "").trim().toLowerCase();
     const cleanName = String(fullName || "").trim();
+    const cleanPhone = String(phone || "").trim();
     const projectDescription = String(
       description || message || body.projectDescription || body.requirements || ""
     ).trim();
 
-    // Basic validation
-    if (!cleanName || !cleanEmail || !projectDescription) {
+    // Required fields validation
+    if (!cleanName) {
       return NextResponse.json(
-        { success: false, error: "Please provide your name, valid email address, and project requirements." },
+        { success: false, error: "Full Name is required." },
         { status: 400 }
       );
     }
 
     // Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(cleanEmail)) {
+    if (!cleanEmail || !emailRegex.test(cleanEmail)) {
       return NextResponse.json(
-        { success: false, error: "Please enter a valid email address (e.g. name@domain.com)." },
+        { success: false, error: "A valid business email address is required (e.g. name@company.com)." },
+        { status: 400 }
+      );
+    }
+
+    // Contact number validation
+    if (!cleanPhone || cleanPhone.replace(/\D/g, "").length < 7) {
+      return NextResponse.json(
+        { success: false, error: "A valid contact number with at least 7 digits is required." },
+        { status: 400 }
+      );
+    }
+
+    if (!projectDescription) {
+      return NextResponse.json(
+        { success: false, error: "Please provide your project brief or technical requirements." },
         { status: 400 }
       );
     }
@@ -123,14 +139,13 @@ export async function POST(req: NextRequest) {
       preferredContact: preferredContact || "Email",
     });
 
-    // 2. Automatically dispatch notification to niyantechh@gmail.com asynchronously
-    // Non-blocking dispatch prevents HTTP socket starvation and timeout under high concurrency
-    sendEnquiryNotification({
+    // 2. Dispatch notification to niyantechh@gmail.com
+    const mailResult = await sendEnquiryNotification({
       id: newEnquiry.id,
       formName: String(formName),
       fullName: cleanName,
       email: cleanEmail,
-      phone: phone ? String(phone).trim() : "Not provided",
+      phone: cleanPhone,
       company: company ? String(company).trim() : "Independent / Individual",
       services: servicesList,
       description: projectDescription,
@@ -138,15 +153,26 @@ export async function POST(req: NextRequest) {
       timeline: newEnquiry.timeline,
       preferredContact: newEnquiry.preferredContact,
       submittedAt: newEnquiry.createdAt,
-    }).catch((mailErr) => {
-      console.error("[MAIL DISPATCH ERROR]", mailErr);
     });
+
+    if (!mailResult.delivered) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: mailResult.error || "Email delivery failed. Please check credentials or retry.",
+          enquiry: newEnquiry,
+          emailDelivered: false,
+        },
+        { status: 502 }
+      );
+    }
 
     return NextResponse.json({
       success: true,
-      message: "Enquiry submitted successfully. Our engineers have been notified.",
+      message: "Thank you! Your consultation request has been submitted successfully. Our team will contact you soon.",
       enquiry: newEnquiry,
-      emailNotified: true,
+      emailDelivered: true,
+      messageId: mailResult.messageId,
     });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Internal server error";

@@ -21,6 +21,7 @@ export default function FinalCta() {
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const toggleService = (title: string) => {
     setSelectedServices((prev) =>
@@ -56,6 +57,33 @@ export default function FinalCta() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+
+    const cleanName = fullName.trim();
+    const cleanEmail = email.trim();
+    const cleanPhone = phone.trim();
+    const cleanMessage = message.trim();
+
+    if (!cleanName) {
+      setError("Please provide your full name.");
+      return;
+    }
+
+    if (!cleanEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      setError("Please provide a valid business email address.");
+      return;
+    }
+
+    if (!cleanPhone || cleanPhone.replace(/\D/g, "").length < 7) {
+      setError("Please provide a valid contact number with at least 7 digits.");
+      return;
+    }
+
+    if (!cleanMessage) {
+      setError("Please enter your project brief or technical requirements.");
+      return;
+    }
+
     setSubmitting(true);
     try {
       const res = await fetch("/api/enquiries", {
@@ -63,22 +91,28 @@ export default function FinalCta() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           formName: "Homepage – Consultation Brief",
-          fullName,
-          email,
-          phone: phone || "Not provided",
-          company: company || "Independent",
-          services: selectedServices.length > 0 ? selectedServices : ["General Project Inquiry"],
-          description: message || "Direct consultation request from website contact desk.",
-          message: message || "Direct consultation request from website contact desk.",
+          fullName: cleanName,
+          email: cleanEmail,
+          phone: cleanPhone,
+          company: company.trim() || "Independent / Organization not specified",
+          services: selectedServices.length > 0 ? selectedServices : ["General Technology Consultation"],
+          description: cleanMessage,
+          message: cleanMessage,
           budget: "Personalized Scoping (To be discussed)",
           preferredContact: "Email",
         }),
       });
-      if (res.ok) {
-        setSubmitted(true);
+
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok || !data?.success) {
+        setError(data?.error || "Failed to submit consultation brief. Please try again.");
+        return;
       }
-    } catch {
+
       setSubmitted(true);
+    } catch {
+      setError("Network or connection error. Please verify your connection and try again.");
     } finally {
       setSubmitting(false);
     }
@@ -115,16 +149,16 @@ export default function FinalCta() {
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 <h3 className="text-2xl font-bold text-[#300C41]">
-                  Consultation Brief Received
+                  Consultation Request Submitted
                 </h3>
-                <p className="text-sm text-[#300C41]/75 max-w-md mx-auto leading-relaxed">
-                  Thank you! An authorized engineering lead will review your
-                  requirements and reach out via WhatsApp or email shortly.
+                <p className="text-sm text-[#300C41]/85 max-w-md mx-auto leading-relaxed font-medium">
+                  Thank you! Your consultation request has been submitted successfully. Our team will contact you soon.
                 </p>
                 <div className="pt-4">
                   <button
                     onClick={() => {
                       setSubmitted(false);
+                      setError("");
                       setFullName("");
                       setEmail("");
                       setPhone("");
@@ -132,7 +166,7 @@ export default function FinalCta() {
                       setMessage("");
                       setSelectedServices([]);
                     }}
-                    className="px-5 py-2.5 text-xs font-bold rounded-lg bg-[#300C41] text-white hover:text-[#DEE948] hover:bg-[#230830] transition-colors"
+                    className="px-5 py-2.5 text-xs font-bold rounded-lg bg-[#300C41] text-white hover:text-[#DEE948] hover:bg-[#230830] transition-colors cursor-pointer"
                   >
                     Submit Another Inquiry
                   </button>
@@ -231,9 +265,10 @@ export default function FinalCta() {
                 {/* Project Brief */}
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-[#300C41] mb-1.5">
-                    Project Brief & Technical Requirements
+                    Project Brief & Technical Requirements *
                   </label>
                   <textarea
+                    required
                     rows={4}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -241,6 +276,13 @@ export default function FinalCta() {
                     className="w-full px-3.5 py-2.5 text-xs text-[#300C41] bg-white border border-[#300C41]/20 rounded-lg focus:outline-none focus:border-[#300C41] focus:ring-1 focus:ring-[#300C41]"
                   />
                 </div>
+
+                {/* Error Banner */}
+                {error && (
+                  <div className="p-3.5 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs font-semibold">
+                    {error}
+                  </div>
+                )}
 
                 {/* Submit row */}
                 <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">

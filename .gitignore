@@ -37,4 +37,6 @@ next-env.d.ts
 
 # scratch & temporary test artifacts
 scratch/
+.wrangler/
+.vscode/
 

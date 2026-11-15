@@ -26,6 +26,7 @@ export default function ScopeEstimatorSection() {
   const [notes, setNotes] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const stages = [
     {
@@ -77,6 +78,13 @@ export default function ScopeEstimatorSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+
+    if (!fullName.trim() || !email.trim() || !phone.trim()) {
+      setError("Please provide your name, business email, and contact number.");
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch("/api/enquiries", {
@@ -84,23 +92,28 @@ export default function ScopeEstimatorSection() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           formName: "Homepage – Scope Estimator Section",
-          fullName,
-          email,
-          phone,
-          company: company || "Independent / Startup",
+          fullName: fullName.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          company: company.trim() || "Independent / Startup",
           services: selectedServices.length > 0 ? selectedServices : ["General Technology Consultation"],
-          description: `[Project Stage]: ${selectedStage} | [Timeline]: ${selectedTimeline} | [Notes]: ${notes || "No additional notes"}`,
-          message: `[Project Stage]: ${selectedStage} | [Timeline]: ${selectedTimeline} | [Notes]: ${notes || "No additional notes"}`,
+          description: `[Project Stage]: ${selectedStage} | [Timeline]: ${selectedTimeline} | [Notes]: ${notes.trim() || "No additional notes"}`,
+          message: `[Project Stage]: ${selectedStage} | [Timeline]: ${selectedTimeline} | [Notes]: ${notes.trim() || "No additional notes"}`,
           budget: "Personalized Scoping (No public prices)",
           preferredContact: "Email",
         }),
       });
 
-      if (res.ok) {
-        setSubmitted(true);
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok || !data?.success) {
+        setError(data?.error || "Failed to submit consultation request. Please try again.");
+        return;
       }
-    } catch {
+
       setSubmitted(true);
+    } catch {
+      setError("Network error. Please verify your connection and try again.");
     } finally {
       setLoading(false);
     }
@@ -570,6 +583,12 @@ export default function ScopeEstimatorSection() {
                         className="w-full px-3.5 py-2.5 text-xs text-[#300C41] bg-white border border-white/20 rounded-lg focus:outline-none focus:border-[#DEE948]"
                       />
                     </div>
+
+                    {error && (
+                      <div className="p-3 rounded-lg bg-red-900/60 border border-red-500/50 text-red-200 text-xs font-semibold">
+                        {error}
+                      </div>
+                    )}
 
                     <div className="pt-2 flex items-center justify-between">
                       <button
