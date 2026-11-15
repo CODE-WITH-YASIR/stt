@@ -4,6 +4,7 @@ import { verifyAdminToken } from "@/lib/auth";
 import { sendEnquiryNotification } from "@/lib/mailer";
 import { rateLimit, getClientIp } from "@/lib/rateLimit";
 
+
 export async function GET() {
   try {
     const reviews = db.getReviews();
@@ -74,7 +75,7 @@ export async function POST(req: NextRequest) {
 
 export async function PATCH(req: NextRequest) {
   try {
-    const admin = verifyAdminToken(req);
+    const admin = await verifyAdminToken(req);
     if (!admin) {
       return NextResponse.json(
         { success: false, error: "Unauthorized. Administrative privileges required." },

@@ -4,10 +4,11 @@ import { verifyAdminToken } from "@/lib/auth";
 import { sendEnquiryNotification } from "@/lib/mailer";
 import { rateLimit, getClientIp } from "@/lib/rateLimit";
 
+
 export async function GET(req: NextRequest) {
   try {
     // Server-side administrative authorization check
-    const admin = verifyAdminToken(req);
+    const admin = await verifyAdminToken(req);
     if (!admin) {
       return NextResponse.json(
         { success: false, error: "Unauthorized. Administrative privileges required." },
@@ -156,7 +157,7 @@ export async function POST(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   try {
     // Server-side administrative authorization check
-    const admin = verifyAdminToken(req);
+    const admin = await verifyAdminToken(req);
     if (!admin) {
       return NextResponse.json(
         { success: false, error: "Unauthorized. Administrative privileges required." },
@@ -186,7 +187,7 @@ export async function PATCH(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   try {
     // Server-side administrative authorization check
-    const admin = verifyAdminToken(req);
+    const admin = await verifyAdminToken(req);
     if (!admin) {
       return NextResponse.json(
         { success: false, error: "Unauthorized. Administrative privileges required." },

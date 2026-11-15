@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { NextRequest } from "next/server";
 
@@ -10,6 +9,7 @@ export interface AdminTokenPayload {
   id: string;
   email: string;
   role: "admin";
+  exp?: number;
 }
 
 export function hashPassword(plainText: string): string {
@@ -19,7 +19,6 @@ export function hashPassword(plainText: string): string {
 export function comparePassword(plainText: string, hash: string): boolean {
   try {
     if (!hash.startsWith("$2a$") && !hash.startsWith("$2b$")) {
-      // Fallback in case of raw password during migration
       return plainText === hash;
     }
     return bcrypt.compareSync(plainText, hash);
@@ -29,8 +28,7 @@ export function comparePassword(plainText: string, hash: string): boolean {
 }
 
 /**
- * Non-blocking asynchronous password verification using libuv threadpool.
- * Prevents event-loop starvation under high concurrency / brute-force load.
+ * Non-blocking asynchronous password verification.
  */
 export async function comparePasswordAsync(plainText: string, hash: string): Promise<boolean> {
   try {
@@ -43,20 +41,75 @@ export async function comparePasswordAsync(plainText: string, hash: string): Pro
   }
 }
 
-export function generateAdminToken(payload: AdminTokenPayload): string {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: "24h" });
+function base64UrlEncode(data: string | Uint8Array): string {
+  let base64 = "";
+  if (typeof data === "string") {
+    if (typeof Buffer !== "undefined") {
+      base64 = Buffer.from(data, "utf8").toString("base64");
+    } else {
+      base64 = btoa(unescape(encodeURIComponent(data)));
+    }
+  } else {
+    if (typeof Buffer !== "undefined") {
+      base64 = Buffer.from(data).toString("base64");
+    } else {
+      let binary = "";
+      for (let i = 0; i < data.byteLength; i++) {
+        binary += String.fromCharCode(data[i]);
+      }
+      base64 = btoa(binary);
+    }
+  }
+  return base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 }
 
-export function verifyAdminToken(req: NextRequest): AdminTokenPayload | null {
+function base64UrlDecode(str: string): string {
+  let base64 = str.replace(/-/g, "+").replace(/_/g, "/");
+  while (base64.length % 4) base64 += "=";
+  if (typeof Buffer !== "undefined") {
+    return Buffer.from(base64, "base64").toString("utf8");
+  }
+  return decodeURIComponent(escape(atob(base64)));
+}
+
+async function getHmacKey(secret: string): Promise<CryptoKey> {
+  const enc = new TextEncoder();
+  return await crypto.subtle.importKey(
+    "raw",
+    enc.encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign", "verify"]
+  );
+}
+
+/**
+ * RFC 7519 compliant JWT generator using native Web Crypto API.
+ * 100% compatible with Node.js, Next.js Edge Runtime, and Cloudflare Workers.
+ */
+export async function generateAdminToken(payload: AdminTokenPayload): Promise<string> {
+  const header = base64UrlEncode(JSON.stringify({ alg: "HS256", typ: "JWT" }));
+  const exp = Math.floor(Date.now() / 1000) + 24 * 60 * 60; // 24 hours
+  const body = base64UrlEncode(JSON.stringify({ ...payload, exp }));
+  const data = `${header}.${body}`;
+  const key = await getHmacKey(JWT_SECRET);
+  const enc = new TextEncoder();
+  const signature = await crypto.subtle.sign("HMAC", key, enc.encode(data));
+  const sigEncoded = base64UrlEncode(new Uint8Array(signature));
+  return `${data}.${sigEncoded}`;
+}
+
+/**
+ * RFC 7519 compliant JWT verifier using native Web Crypto API.
+ */
+export async function verifyAdminToken(req: NextRequest): Promise<AdminTokenPayload | null> {
   try {
-    // Check Authorization Header
     const authHeader = req.headers.get("authorization");
     let token = "";
 
     if (authHeader && authHeader.startsWith("Bearer ")) {
       token = authHeader.substring(7);
     } else {
-      // Check cookies
       const cookie = req.cookies.get("niyan_admin_token");
       if (cookie) {
         token = cookie.value;
@@ -65,15 +118,37 @@ export function verifyAdminToken(req: NextRequest): AdminTokenPayload | null {
 
     if (!token) return null;
 
-    const decoded = jwt.verify(token, JWT_SECRET) as AdminTokenPayload;
+    const parts = token.split(".");
+    if (parts.length !== 3) return null;
 
-    // Strict validation: must have role admin AND matching authorized email
+    const [headerB64, bodyB64, sigB64] = parts;
+    const data = `${headerB64}.${bodyB64}`;
+    const key = await getHmacKey(JWT_SECRET);
+    const enc = new TextEncoder();
+
+    let base64 = sigB64.replace(/-/g, "+").replace(/_/g, "/");
+    while (base64.length % 4) base64 += "=";
+    const binary = atob(base64);
+    const sigBytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      sigBytes[i] = binary.charCodeAt(i);
+    }
+
+    const isValid = await crypto.subtle.verify("HMAC", key, sigBytes, enc.encode(data));
+    if (!isValid) return null;
+
+    const payload = JSON.parse(base64UrlDecode(bodyB64)) as AdminTokenPayload;
+
+    if (payload.exp && Math.floor(Date.now() / 1000) > payload.exp) {
+      return null;
+    }
+
     if (
-      decoded &&
-      decoded.role === "admin" &&
-      decoded.email.toLowerCase() === PRIMARY_ADMIN_EMAIL.toLowerCase()
+      payload &&
+      payload.role === "admin" &&
+      payload.email.toLowerCase() === PRIMARY_ADMIN_EMAIL.toLowerCase()
     ) {
-      return decoded;
+      return payload;
     }
 
     return null;
@@ -81,4 +156,3 @@ export function verifyAdminToken(req: NextRequest): AdminTokenPayload | null {
     return null;
   }
 }
-

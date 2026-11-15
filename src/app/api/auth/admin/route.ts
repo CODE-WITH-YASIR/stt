@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { PRIMARY_ADMIN_EMAIL, comparePasswordAsync, generateAdminToken } from "@/lib/auth";
 import { rateLimit, getClientIp } from "@/lib/rateLimit";
 
+
 export async function POST(req: NextRequest) {
   try {
     const clientIp = getClientIp(req);
@@ -50,7 +51,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Generate cryptographically signed JWT token
-    const token = generateAdminToken({
+    const token = await generateAdminToken({
       id: adminUser.id,
       email: adminUser.email,
       role: "admin",

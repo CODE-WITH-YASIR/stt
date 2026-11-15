@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { verifyAdminToken } from "@/lib/auth";
 
+
 export async function GET() {
   try {
     const blogPosts = db.getBlogPosts();
@@ -21,7 +22,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const admin = verifyAdminToken(req);
+    const admin = await verifyAdminToken(req);
     if (!admin) {
       return NextResponse.json(
         { success: false, error: "Unauthorized. Administrative privileges required." },
@@ -63,7 +64,7 @@ export async function POST(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
-    const admin = verifyAdminToken(req);
+    const admin = await verifyAdminToken(req);
     if (!admin) {
       return NextResponse.json(
         { success: false, error: "Unauthorized. Administrative privileges required." },
